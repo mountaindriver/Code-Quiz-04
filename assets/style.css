@@ -1,0 +1,46 @@
+.top-bar {
+    color: white;
+    background-color: blueviolet;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+.highscore:hover {
+    color: black;
+    cursor: pointer;
+}
+.clock:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.container {
+    margin: auto;
+    border: 2px red solid;
+    padding: 10px;
+    width: 80%;
+}
+
+.question {
+    margin: auto;
+    border: 2px blue solid;
+}
+
+li {
+    color: black;
+    background-color: violet;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 15px;
+    list-style-type: lower-alpha;
+}
+
+li:hover {
+    font-weight: bold;
+    background-color: blueviolet;
+    cursor: pointer;
+}
+li:active {
+    background-color: darkmagenta;
+}
