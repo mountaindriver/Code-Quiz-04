@@ -21,7 +21,7 @@ var time = 60;
 
 
 // START
-counter.textContent = `Time remaining: ${time}`;
+counter.textContent = time;
 question.textContent = "Coding Quiz!";
 instructions.textContent = "Answer the following question! For every incorrect answer time will be removed from the clock! At the end of the quiz type your inital in to save your highscore!";
 button.textContent = "PLAY GAME!"
@@ -44,6 +44,7 @@ button.addEventListener("click", function(){
 function question1(){
     timerStart();
     question.textContent = "What is not a JavaScript Data Type?"
+    instructions.textContent = ""
     answerA.textContent = "String"
     answerB.textContent = "Boolean"
     answerC.textContent = "Element"
@@ -59,7 +60,7 @@ function question1(){
         question2();
     })
     answerC.addEventListener("click", function(){
-        score + 10;
+        score = score + 10;
         console.log("Correct")
         question2();
     })
@@ -88,7 +89,7 @@ function question2(){
         question3();
     })
     answerC.addEventListener("click", function(){
-        score + 10;
+        score = score + 10;
         console.log("Correct")
         question3();
     })
@@ -117,7 +118,7 @@ function question3(){
         question4();
     })
     answerC.addEventListener("click", function(){
-        score + 10;
+        score = score + 10;
         console.log("Correct")
         question4();
     })
@@ -144,7 +145,7 @@ function question4(){
         gameOver();
     })
     answerC.addEventListener("click", function(){
-        score + 10;
+        score = score + 10;
         console.log("Correct")
         gameOver();
     })
@@ -158,22 +159,33 @@ function question4(){
 function gameOver(){
 
     question.textContent = "All done!";
+    score = score + time;
     instructions.textContent = "Your final Score is " + score;
-    a.textContent = "Start";
+    instructions.appendChild(button);
+    button.textContent = "Start over";
 
+    button.addEventListener("click", function(){
+        // reload page?
+    })
 
 }
 
+
+// Why does it only go once?
 function timerStart(){
+
     var timeInterval = setInterval(function (){
-        time--;
+        if (time > 0){
+            time --;
+            clock.textContent = time; 
+        }
         
         if (time = 0){
-            alert ("YOU FAILED!")
+            alert ("YOU'VE FAILED!")
             clearInterval(timeInterval)
             score = 0;
-            time = 60;
             gameOver()
+            time = 60;
         }
         
     }, 1000);
