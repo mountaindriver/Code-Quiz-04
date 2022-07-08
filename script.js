@@ -180,7 +180,7 @@ function timerStart(){
             clock.textContent = time; 
         }
         
-        if (time = 0){
+        if (time === 0){
             alert ("YOU'VE FAILED!")
             clearInterval(timeInterval)
             score = 0;
