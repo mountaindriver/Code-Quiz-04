@@ -4,12 +4,6 @@ var container = document.getElementById("container");
 var question = document.getElementById("question");
 var instructions = document.getElementById("instructions")
 var answers = document.getElementById("answers");
-var a = document.getElementById("a");
-var b = document.getElementById("b");
-var c = document.getElementById("c");
-var d = document.getElementById("d");
-var label = document.createElement("label");
-var input = document.createElement("input");
 var answerA = document.createElement("li");
 var answerB = document.createElement("li");
 var answerC = document.createElement("li");
@@ -37,9 +31,6 @@ button.addEventListener("click", function(){
     instructions.removeChild(button);
 })
 
-
-// Why is this triggering?!
-// document.getElementById("a").addEventListener("click", question1())
 
 function question1(){
     timerStart();
@@ -78,7 +69,6 @@ function question2(){
     answerB.textContent = "Python"
     answerC.textContent = "JavaScript"
     answerD.textContent = "C#"
-    console.log("Question 2")
 
     answerA.addEventListener("click", function(){
         time - 10;
@@ -90,7 +80,6 @@ function question2(){
     })
     answerC.addEventListener("click", function(){
         score = score + 10;
-        console.log("Correct")
         question3();
     })
     answerD.addEventListener("click", function(){
@@ -106,7 +95,6 @@ function question3(){
     answerB.textContent = "Confirm"
     answerC.textContent = "Ad"
     answerD.textContent = "Prompt"
-    console.log("Question 3")
 
    
     answerA.addEventListener("click", function(){
@@ -119,7 +107,6 @@ function question3(){
     })
     answerC.addEventListener("click", function(){
         score = score + 10;
-        console.log("Correct")
         question4();
     })
     answerD.addEventListener("click", function(){
@@ -134,7 +121,6 @@ function question4(){
     answerB.textContent = "35"
     answerC.textContent = "57"
     answerD.textContent = "327"
-    console.log("Question 4")
 
     answerA.addEventListener("click", function(){
         time - 10;
@@ -146,7 +132,6 @@ function question4(){
     })
     answerC.addEventListener("click", function(){
         score = score + 10;
-        console.log("Correct")
         gameOver();
     })
     answerD.addEventListener("click", function(){
@@ -163,7 +148,7 @@ function gameOver(){
     instructions.textContent = "Your final Score is " + score;
     instructions.appendChild(button);
     button.textContent = "Start over";
-
+    clearInterval(timeInterval)
     button.addEventListener("click", function(){
         // reload page?
     })
@@ -171,7 +156,6 @@ function gameOver(){
 }
 
 
-// Why does it only go once?
 function timerStart(){
 
     var timeInterval = setInterval(function (){
