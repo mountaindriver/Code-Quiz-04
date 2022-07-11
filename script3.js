@@ -1,7 +1,7 @@
 var questions = [
     {
         question: "What is NOT a JavaScript Data Type?",
-        choices: ["String", "Boolean", " Element", "Undefined"],
+        choices: ["String", "Boolean", "Element", "Undefined"],
         correctAnswer: "Element"
     },
     {
@@ -21,11 +21,12 @@ var questions = [
     }
 ]
 var scoreInput = document.querySelector("#score");
-var scoreForm = document.querySelector("#score-form");
-var scoreList = document.querySelector("#score-list");
-var scoreCountSpan = document.getElementById("score-count");
+var initialForm = document.querySelector("#initial-form");
+var initialList = document.querySelector("#initial-list");
+var highScoreCountSpan = document.getElementById("highScore-count");
+var initialText = document.getElementById("initial-text")
 
-var scores = [];
+var highScores = [];
 
 var currentQuestion, timeRemaining;
 var score = 0
@@ -98,7 +99,15 @@ function gameOver (){
    console.log("gameOver")
    document.getElementById("startMenu").setAttribute("style", "display: none;")
    document.getElementById("questionSection").setAttribute("style", "display: none;")
-   document.getElementById("gameOver").setAttribute("style", "")
+   document.getElementById("gameOver").setAttribute("style", "");
+   
+   if(score < 201){
+    console.log("You lose")
+    score = 0
+   }else {
+    score = score + timeRemaining;
+    console.log("Passing Grade")
+   }
 
    var scoreDisplay = document.getElementById("score");
    scoreDisplay.textContent = ("Score: " + score);
@@ -109,10 +118,10 @@ function checkAnswer(event) {
     console.log(event.target)
     if(event.target.textContent == questions[currentQuestion].correctAnswer) {
         console.log("correct!")
-        score = score + 10;
+        score = score + 100;
     } else {
         console.log("incorrect")
-        timeRemaining = timeRemaining - 10
+        timeRemaining = timeRemaining - 25;
     }
     
     currentQuestion++;
@@ -122,61 +131,60 @@ function checkAnswer(event) {
 }
 
 function renderScores(){
-   scoreList.innerHTML = "";
-   scoreCountSpan.textContent = scores.length;
+   initialList.innerHTML = "";  
+   highScoreCountSpan.textContent = highScores.length;
 
-   for (var i = 0; i < scores.length; i++){
-    var score = score[i];
+   for (var i = 0; i < highScores.length; i++){
+    var highScore = highScores[i];
 
     var li = document.createElement("li");
-    li.textContent = score;
+    li.textContent = highScore;
     li.setAttribute("data-index", i);
 
     var button = document.createElement("button");
     button.textContent = "Delete"
 
     li.appendChild(button);
-    scoreList.appendChild(li);
+    initialList.appendChild(li);
    }
-
 
 }
 
 function init(){
-    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    var storedScores = JSON.parse(localStorage.getItem("highScores"));
 
     if (storedScores != null) {
-        scores = storedScores;
+        highScores = storedScores;
     }
 
     renderScores();
 }
 
 function storeScores(){
-    localStorage.setItem("scores", JSON.stringify(scores))
+    localStorage.setItem("highScores", JSON.stringify(highScores))
 }
 
-scoreForm.addEventListener("submit", function(event) {
+initialForm.addEventListener("submit", function(event) {
     event.preventDefault();
     
-    var scoreText = score;
+    var highScoreText = initialText.value + ": " + score;
 
-    if (scoreText === ""){
+    if (initialText === ""){
         return;
     }
 
-    scores.push(scoreText);
-    scoreInput.value = "";
+    highScores.push(highScoreText);
+    initialText.value = "";
 
     storeScores();
     renderScores();
 })
 
-scoreList.addEventListener("click", function(event){
+initialList.addEventListener("click", function(event){
     var element = event.target
-    if (element.mathces("button") === true){
-        var index = element.parentElement.getAttributes("data-index");
-        scores.splice(index, 1);
+    if (element.matches("button") === true){
+        var index = element.parentElement.getAttribute("data-index");
+        highScores.splice(index, 1);
         
         storeScores();
         renderScores();

@@ -12,29 +12,26 @@
     <div class="top-bar">
         <h1>Code Quiz</h1>
         <h3 class="highscore"><a href="Highscore.html">View Highscore</a></h3>
-        <h3 class="clock">Time remaining: <span id="clock"></span></h3>
-    </div>
-    <div class="clock">
-        <h3 id="counter"></h3>
+        <h3 class="clock">Time remaining: <span id="counter"></span></h3>
     </div>
     <div id="startMenu" class="container">
         <h1>Code Quiz</h1>
-        <p>Every answer right +10 points!<br> Every answer wrong -10 seconds :(</p>
+        <p>Get a 75% correct to score <br> Every answer right +100 points!<br> Every answer wrong -10 seconds :(</p>
         <button id="startQuizBtn">Start</button>
     </div>
     <div id="questionSection" class="container" style="display: none;">
         
     </div>
     <div id="gameOver" style="display: none;">
-        <h1>Scores: <span id="score"></span></h1>
-        <p id="scoreP">Enter your initals to save your Score</p>
-        <form id="score-form">
-            <label for="score-text">Initials: </label>
-            <input id="score-text" placeholder="LSF" type="text"><br><br>
+        <h1><span id="score"></span></h1>
+        <p id="initialP">Enter your initals to save your Score</p>
+        <form id="initial-form">
+            <label for="initial-text">Initials: </label>
+            <input id="initial-text" placeholder="LSF" type="text"><br><br>
             
         </form>
-        <p>Score Count: <span id="score-count">0</span></p>    
-        <ul id="score-list"></ul>
+        <p>HighScore Count: <span id="highScore-count">0</span></p>    
+        <ul id="initial-list"></ul>
 
     </div>
 

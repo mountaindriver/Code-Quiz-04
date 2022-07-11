@@ -60,3 +60,11 @@ button {
  a:hover {
     color: black;
  }
+
+ #gameOver li{
+    color: black;
+    background-color: red;
+    font-weight: bolder;
+    font-size: larger;
+    padding-left: 20px;
+ }
