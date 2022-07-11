@@ -9,14 +9,18 @@
     <link rel="stylesheet"  href="./assets/style.css">
 </head>
 <body>
-    <div class="top-bar">
-        <h1>Code Quiz</h1>
-        <h3 class="highscore"><a href="Highscore.html">View Highscore</a></h3>
+    <div id="topbar" style="display: none;">
         <h3 class="clock">Time remaining: <span id="counter"></span></h3>
     </div>
     <div id="startMenu" class="container">
         <h1>Code Quiz</h1>
-        <p>Get a 75% correct to score <br> Every answer right +100 points!<br> Every answer wrong -10 seconds :(</p>
+        <ul>
+            <li>Get a 75% correct to score</li>
+            <li> 90 seconds time limit</li>
+            <li>Every answer right +100 points!</li>
+            <li> Every answer wrong -25 seconds and -50 points! :(</li>
+        </ul>
+        
         <button id="startQuizBtn">Start</button>
     </div>
     <div id="questionSection" class="container" style="display: none;">
@@ -35,6 +39,6 @@
 
     </div>
 
-    <script src="script3.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

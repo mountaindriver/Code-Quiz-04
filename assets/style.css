@@ -1,70 +1,97 @@
-.top-bar {
-    color: tan;
-    background-color: royalblue;
-    padding: 5px;
-    margin: 10px;
-    border-radius: 15px;
-}
+body {
+    
+    background-color: hsl(200, 39%, 95%);
+    color: #001b44;
 
-.highscore:hover {
-    color: black;
-    cursor: pointer;
-}
-.clock:hover {
-    color: black;
-    cursor: pointer;
-}
-
-.container {
     margin: auto;
-    border: 2px red solid;
-    padding: 10px;
     width: 80%;
+    padding: 10px
 }
 
-.question {
+
+#topbar {
+    padding: 10px;
+    font-size: 1.5em;
+}
+
+#startMenu {
     margin: auto;
-    border: 2px blue solid;
+    width: 90%;
+    padding: 10px;
+    background-color: #ffe9df;
 }
 
-.questionSection {
-   
-}
-
-li {
-    color: black;
-    background-color: violet;
+#startMenu {
     margin: 10px;
-    padding: 5px;
-    border-radius: 15px;
-    list-style-type: lower-alpha;
-    margin-right: 400px;
 }
 
-li:hover {
-    font-weight: bold;
-    background-color: blueviolet;
+#questionSection {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    background-color: #ffe9df;
+}
+
+#questionSection li {
+    color: black;
+    /* background-color: rgb(238, 191, 159); */
+    width: 60%;
+    margin: 15px;
+    margin-left: 30px;
+    padding: 5px;
+    list-style-type: Upper-alpha;
+}    
+
+
+#questionSection li:hover {
+    font-weight: bolder;
+    text-decoration: underline;
     cursor: pointer;
 }
-li:active {
-    background-color: darkmagenta;
+
+
+#startMenu button {
+    color: white;
+    background-color: #ff7034;
+
+    height: 2em;
+    width: 5em;
+    cursor: pointer;
+    font-size: 2em;
 }
 
-button {
-    border: 2px red solid;
-}
- a {
-    color: tan;
- }
+#gameOver {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    background-color: #ffe9df;
 
- a:hover {
-    color: black;
- }
+    font-size: larger;
+    font-weight: bolder;
+}
+
 
  #gameOver li{
-    color: black;
-    background-color: red;
-    font-weight: bolder;
-    font-size: larger;
-    padding-left: 20px;
+    height: 50px;
+    margin: 10px 20px 10px 20px;
+    padding: 5px;
+
+    color: white;
+    background-color: #001b44;
+
+    font-size: 1.5em;
+    line-height: 1.5;
+    border-radius: 0;
+    list-style-type: circle;
+ }
+
+ #gameOver li button{
+    float: right;
+    color: white;
+    background-color: #ff7034;
+
+    height: 40px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1em;
  }

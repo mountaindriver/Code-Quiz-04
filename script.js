@@ -1,185 +1,7 @@
-var highscores = document.getElementById("highscores");
-var counter = document.getElementById("clock");
-var container = document.getElementById("container");
-var question = document.getElementById("question");
-var instructions = document.getElementById("instructions")
-var answers = document.getElementById("answers");
-var answerA = document.createElement("li");
-var answerB = document.createElement("li");
-var answerC = document.createElement("li");
-var answerD = document.createElement("li");
-var button = document.createElement("button");
-
-var score = 0;
-var time = 60;
-
-
-// START
-counter.textContent = time;
-question.textContent = "Coding Quiz!";
-instructions.textContent = "Answer the following question! For every incorrect answer time will be removed from the clock! At the end of the quiz type your inital in to save your highscore!";
-button.textContent = "PLAY GAME!"
-instructions.appendChild(button);
-
-
-button.addEventListener("click", function(){
-    question1();
-    instructions.appendChild(answerA);
-    instructions.appendChild(answerB);
-    instructions.appendChild(answerC);
-    instructions.appendChild(answerD);
-    instructions.removeChild(button);
-})
-
-
-function question1(){
-    timerStart();
-    question.textContent = "What is not a JavaScript Data Type?"
-    instructions.textContent = ""
-    answerA.textContent = "String"
-    answerB.textContent = "Boolean"
-    answerC.textContent = "Element"
-    answerD.textContent = "Undefined"
-    console.log("Question 1")
-
-    answerA.addEventListener("click", function(){
-        time - 10;
-        question2();
-    })
-    answerB.addEventListener("click", function(){
-        time - 10;
-        question2();
-    })
-    answerC.addEventListener("click", function(){
-        score = score + 10;
-        console.log("Correct")
-        question2();
-    })
-    answerD.addEventListener("click", function(){
-        time - 10;
-        question2();
-    })
-    
-
-}
-
-function question2(){
-    question.textContent = "What is the most used language in computer science?"
-    answerA.textContent = "HTML"
-    answerB.textContent = "Python"
-    answerC.textContent = "JavaScript"
-    answerD.textContent = "C#"
-
-    answerA.addEventListener("click", function(){
-        time - 10;
-        question3();
-    })
-    answerB.addEventListener("click", function(){
-        time - 10;
-        question3();
-    })
-    answerC.addEventListener("click", function(){
-        score = score + 10;
-        question3();
-    })
-    answerD.addEventListener("click", function(){
-        time - 10;
-        question3();
-    })
-    
-}
-
-function question3(){
-    question.textContent = "What is NOT a type of pop up boxes in JavaScript?"
-    answerA.textContent = "Alert"
-    answerB.textContent = "Confirm"
-    answerC.textContent = "Ad"
-    answerD.textContent = "Prompt"
-
-   
-    answerA.addEventListener("click", function(){
-        time - 10;
-        question4();
-    })
-    answerB.addEventListener("click", function(){
-        time - 10;
-        question4();
-    })
-    answerC.addEventListener("click", function(){
-        score = score + 10;
-        question4();
-    })
-    answerD.addEventListener("click", function(){
-        time - 10;
-        question4();
-    })
-}
-
-function question4(){
-    question.textContent = "What would be the result of 3+2+”7″?"
-    answerA.textContent = "12"
-    answerB.textContent = "35"
-    answerC.textContent = "57"
-    answerD.textContent = "327"
-
-    answerA.addEventListener("click", function(){
-        time - 10;
-        gameOver();
-    })
-    answerB.addEventListener("click", function(){
-        time - 10;
-        gameOver();
-    })
-    answerC.addEventListener("click", function(){
-        score = score + 10;
-        gameOver();
-    })
-    answerD.addEventListener("click", function(){
-        time - 10;
-        gameOver();
-    })
-   
-}
-
-function gameOver(){
-
-    question.textContent = "All done!";
-    score = score + time;
-    instructions.textContent = "Your final Score is " + score;
-    instructions.appendChild(button);
-    button.textContent = "Start over";
-    clearInterval(timeInterval)
-    button.addEventListener("click", function(){
-        // reload page?
-    })
-
-}
-
-
-function timerStart(){
-
-    var timeInterval = setInterval(function (){
-        if (time > 0){
-            time --;
-            clock.textContent = time; 
-        }
-        
-        if (time === 0){
-            alert ("YOU'VE FAILED!")
-            clearInterval(timeInterval)
-            score = 0;
-            gameOver()
-            time = 60;
-        }
-        
-    }, 1000);
-}
-
-
 var questions = [
     {
         question: "What is NOT a JavaScript Data Type?",
-        choices: ["String", "Boolean", " Element", "Undefined"],
+        choices: ["String", "Boolean", "Element", "Undefined"],
         correctAnswer: "Element"
     },
     {
@@ -188,7 +10,7 @@ var questions = [
         correctAnswer: "JavaScript"
     },
     {
-        question: "What is NOT a type of pop up boxes in JavaScript?",
+        question: "What is NOT a type of pop up box in JavaScript?",
         choices: ["Alert", "Confirm", "Ad", "Prompt"],
         correctAnswer: "Ad"
     },
@@ -198,70 +20,180 @@ var questions = [
         correctAnswer: "57"
     }
 ]
+var scoreInput = document.querySelector("#score");
+var initialForm = document.querySelector("#initial-form");
+var initialList = document.querySelector("#initial-list");
+var highScoreCountSpan = document.getElementById("highScore-count");
+var initialText = document.getElementById("initial-text")
+
+var highScores = [];
+
 var currentQuestion, timeRemaining;
-var startBtn = document.getElementById("startQuizBtn");
+var score = 0
+var startBtn = document.getElementById("startQuizBtn")
+var submit = document.getElementById("submit")
+
 
 function quizStart() {
     timeRemaining = 90;
-    timerStart();
-    document.getElementById("startMenu").setAttribute("style", "display: none;")
-    document.getElementById("questionSection").setAttribute("style", "display: block;")
-    currentQuestion = 0;
+    timerStarts();
+    document.getElementById("startMenu").setAttribute("style", "display: none;");
+    document.getElementById("questionSection").setAttribute("style", "");
+    document.getElementById("topbar").setAttribute("style", "");
+    currentQuestion=0;
     showQuestion();
 }
 
-function timerStart() {
+function timerStarts () {
     var newInterval = setInterval(function() {
         timeRemaining--;
         document.getElementById("counter").textContent = timeRemaining;
 
-        if(timeRemaining <= 0 || currentQuestion >= questions.length){
-            alert("Finished!")
+        if(timeRemaining<=0 || currentQuestion > questions.length) {
             clearInterval(newInterval)
+            gameOver();
+        }
+        if (currentQuestion > 3){
+            clearInterval(newInterval)
+            gameOver();
         }
     }, 1000)
 }
 
-function showQuestion(){
+function showQuestion() {
     var questionDiv = document.getElementById("questionSection");
-    questionDiv.innerHTML=""
+    questionDiv.innerHTML= ""
 
-    var newQuestion = document.createElement("h1");
+    var newQuestion = document.createElement("h1")
     newQuestion.textContent = questions[currentQuestion].question;
 
-    var choiceOne = document.createElement("button")
-    var choiceTwo = document.createElement("button")
-    var choiceThree = document.createElement("button")
-    var choiceFour = document.createElement("button")
+    var choiceOne = document.createElement("li")
+    var choiceTwo = document.createElement("li")
+    var choiceThree = document.createElement("li")
+    var choiceFour = document.createElement("li")
 
     choiceOne.textContent = questions[currentQuestion].choices[0]
     choiceTwo.textContent = questions[currentQuestion].choices[1]
     choiceThree.textContent = questions[currentQuestion].choices[2]
     choiceFour.textContent = questions[currentQuestion].choices[3]
 
+    choiceOne.addEventListener("click", checkAnswer)
+    choiceTwo.addEventListener("click", checkAnswer)
+    choiceThree.addEventListener("click", checkAnswer)
+    choiceFour.addEventListener("click", checkAnswer)
+
     questionDiv.appendChild(newQuestion)
     questionDiv.appendChild(choiceOne)
     questionDiv.appendChild(choiceTwo)
-    questionDiv.appendChild(choiceThree)
+    questionDiv.appendChild(choiceThree) 
     questionDiv.appendChild(choiceFour)
 
+    if (currentQuestion > 3){
+        questionDiv.removeChild(choiceOne)
+        questionDiv.removeChild(choiceTwo)
+        questionDiv.removeChild(choiceThree)
+        questionDiv.removeChild(choiceFour)
+    }
+}
 
+function gameOver (){
+   console.log("gameOver")
+   document.getElementById("startMenu").setAttribute("style", "display: none;")
+   document.getElementById("questionSection").setAttribute("style", "display: none;")
+   document.getElementById("gameOver").setAttribute("style", "");
+   
+   if(score < 201){
+    console.log("You lose")
+    score = 0
+   }else {
+    score = score + timeRemaining;
+    console.log("Passing Grade")
+   }
+
+   var scoreDisplay = document.getElementById("score");
+   scoreDisplay.textContent = ("Score: " + score);
+
+   document.getElementById("topbar").setAttribute("style", "display: none;");
 }
 
 function checkAnswer(event) {
     console.log(event.target)
     if(event.target.textContent == questions[currentQuestion].correctAnswer) {
-        console.log("Correct")
-        score = score + 10;
+        console.log("correct!")
+        score = score + 100;
     } else {
-        console.log("Incorrect")
-        timeRemaining = timeRemaining - 10;
+        console.log("incorrect")
+        score = score - 50
+        timeRemaining = timeRemaining - 25;
     }
-
+    
     currentQuestion++;
-    if(currentQuestion < question.length){
-        showQuestion()
+    if(currentQuestion < questions.length) {
+        showQuestion();
     }
 }
 
-startBtn.addEventListener("click", quizStart())
+function renderScores(){
+   initialList.innerHTML = "";  
+   highScoreCountSpan.textContent = highScores.length;
+
+   for (var i = 0; i < highScores.length; i++){
+    var highScore = highScores[i];
+
+    var li = document.createElement("li");
+    li.textContent = highScore;
+    li.setAttribute("data-index", i);
+
+    var button = document.createElement("button");
+    button.textContent = "Delete"
+
+    li.appendChild(button);
+    initialList.appendChild(li);
+   }
+
+}
+
+function init(){
+    var storedScores = JSON.parse(localStorage.getItem("highScores"));
+
+    if (storedScores != null) {
+        highScores = storedScores;
+    }
+
+    renderScores();
+}
+
+function storeScores(){
+    localStorage.setItem("highScores", JSON.stringify(highScores))
+}
+
+initialForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    var highScoreText = initialText.value + ": " + score;
+
+    if (initialText === ""){
+        return;
+    }
+
+    highScores.push(highScoreText);
+    initialText.value = "";
+
+    storeScores();
+    renderScores();
+})
+
+initialList.addEventListener("click", function(event){
+    var element = event.target
+    if (element.matches("button") === true){
+        var index = element.parentElement.getAttribute("data-index");
+        highScores.splice(index, 1);
+        
+        storeScores();
+        renderScores();
+    }
+});
+    
+init();
+
+startBtn.addEventListener("click", quizStart)

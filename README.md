@@ -130,8 +130,8 @@ These resources helped me greatly and gave me different perspectives on how to c
 
 * [MDN](https://developer.mozilla.org/en-US/)
 * [Andres Long- Triology Tutor]()
-* []() 
-* []()
+* [Coding Bootcamp 04/26 Todos list](http://127.0.0.1:5501/04-Web-APIs/01-Activities/26-Stu_Local-Storage-Todos/Solved/index.html) 
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
