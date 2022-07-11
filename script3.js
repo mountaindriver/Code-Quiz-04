@@ -20,8 +20,18 @@ var questions = [
         correctAnswer: "57"
     }
 ]
+var scoreInput = document.querySelector("#score");
+var scoreForm = document.querySelector("#score-form");
+var scoreList = document.querySelector("#score-list");
+var scoreCountSpan = document.getElementById("score-count");
+
+var scores = [];
+
 var currentQuestion, timeRemaining;
+var score = 0
 var startBtn = document.getElementById("startQuizBtn")
+var submit = document.getElementById("submit")
+
 
 function quizStart() {
     timeRemaining = 90;
@@ -38,7 +48,10 @@ function timerStarts () {
         document.getElementById("counter").textContent = timeRemaining;
 
         if(timeRemaining<=0 || currentQuestion > questions.length) {
-            alert("you're done, son")
+            clearInterval(newInterval)
+            gameOver();
+        }
+        if (currentQuestion > 3){
             clearInterval(newInterval)
             gameOver();
         }
@@ -52,10 +65,10 @@ function showQuestion() {
     var newQuestion = document.createElement("h1")
     newQuestion.textContent = questions[currentQuestion].question;
 
-    var choiceOne = document.createElement("button")
-    var choiceTwo = document.createElement("button")
-    var choiceThree = document.createElement("button")
-    var choiceFour = document.createElement("button")
+    var choiceOne = document.createElement("li")
+    var choiceTwo = document.createElement("li")
+    var choiceThree = document.createElement("li")
+    var choiceFour = document.createElement("li")
 
     choiceOne.textContent = questions[currentQuestion].choices[0]
     choiceTwo.textContent = questions[currentQuestion].choices[1]
@@ -72,10 +85,24 @@ function showQuestion() {
     questionDiv.appendChild(choiceTwo)
     questionDiv.appendChild(choiceThree) 
     questionDiv.appendChild(choiceFour)
+
+    if (currentQuestion > 3){
+        questionDiv.removeChild(choiceOne)
+        questionDiv.removeChild(choiceTwo)
+        questionDiv.removeChild(choiceThree)
+        questionDiv.removeChild(choiceFour)
+    }
 }
 
 function gameOver (){
-    document.getElementById("startMenu").setAttribute("style", "display: block;")
+   console.log("gameOver")
+   document.getElementById("startMenu").setAttribute("style", "display: none;")
+   document.getElementById("questionSection").setAttribute("style", "display: none;")
+   document.getElementById("gameOver").setAttribute("style", "")
+
+   var scoreDisplay = document.getElementById("score");
+   scoreDisplay.textContent = ("Score: " + score);
+   
 }
 
 function checkAnswer(event) {
@@ -87,13 +114,75 @@ function checkAnswer(event) {
         console.log("incorrect")
         timeRemaining = timeRemaining - 10
     }
-
+    
     currentQuestion++;
     if(currentQuestion < questions.length) {
-        showQuestion()
-        clearInterval(newInterval)
+        showQuestion();
     }
+}
+
+function renderScores(){
+   scoreList.innerHTML = "";
+   scoreCountSpan.textContent = scores.length;
+
+   for (var i = 0; i < scores.length; i++){
+    var score = score[i];
+
+    var li = document.createElement("li");
+    li.textContent = score;
+    li.setAttribute("data-index", i);
+
+    var button = document.createElement("button");
+    button.textContent = "Delete"
+
+    li.appendChild(button);
+    scoreList.appendChild(li);
+   }
+
 
 }
+
+function init(){
+    var storedScores = JSON.parse(localStorage.getItem("scores"));
+
+    if (storedScores != null) {
+        scores = storedScores;
+    }
+
+    renderScores();
+}
+
+function storeScores(){
+    localStorage.setItem("scores", JSON.stringify(scores))
+}
+
+scoreForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    var scoreText = score;
+
+    if (scoreText === ""){
+        return;
+    }
+
+    scores.push(scoreText);
+    scoreInput.value = "";
+
+    storeScores();
+    renderScores();
+})
+
+scoreList.addEventListener("click", function(event){
+    var element = event.target
+    if (element.mathces("button") === true){
+        var index = element.parentElement.getAttributes("data-index");
+        scores.splice(index, 1);
+        
+        storeScores();
+        renderScores();
+    }
+});
+    
+init();
 
 startBtn.addEventListener("click", quizStart)

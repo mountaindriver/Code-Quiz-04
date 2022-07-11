@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="top-bar">
+        <h1>Code Quiz</h1>
         <h3 class="highscore"><a href="Highscore.html">View Highscore</a></h3>
         <h3 class="clock">Time remaining: <span id="clock"></span></h3>
     </div>
@@ -23,6 +24,18 @@
     </div>
     <div id="questionSection" class="container" style="display: none;">
         
+    </div>
+    <div id="gameOver" style="display: none;">
+        <h1>Scores: <span id="score"></span></h1>
+        <p id="scoreP">Enter your initals to save your Score</p>
+        <form id="score-form">
+            <label for="score-text">Initials: </label>
+            <input id="score-text" placeholder="LSF" type="text"><br><br>
+            
+        </form>
+        <p>Score Count: <span id="score-count">0</span></p>    
+        <ul id="score-list"></ul>
+
     </div>
 
     <script src="script3.js"></script>

@@ -1,6 +1,6 @@
 .top-bar {
-    color: white;
-    background-color: blueviolet;
+    color: tan;
+    background-color: royalblue;
     padding: 5px;
     margin: 10px;
     border-radius: 15px;
@@ -27,6 +27,10 @@
     border: 2px blue solid;
 }
 
+.questionSection {
+   
+}
+
 li {
     color: black;
     background-color: violet;
@@ -34,6 +38,7 @@ li {
     padding: 5px;
     border-radius: 15px;
     list-style-type: lower-alpha;
+    margin-right: 400px;
 }
 
 li:hover {
@@ -48,3 +53,10 @@ li:active {
 button {
     border: 2px red solid;
 }
+ a {
+    color: tan;
+ }
+
+ a:hover {
+    color: black;
+ }
